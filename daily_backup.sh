@@ -10,10 +10,10 @@ print_disk_usage() {
 
 
 
-source='/Users/ryanapfel/Documents/UCLA/spreadsheets'
-full_backup_path='/Users/ryanapfel/Documents/UCLA/backup'
-daily_backup_path='/Users/ryanapfel/Documents/UCLA/backup'
-log_path='/Users/ryanapfel/Documents/UCLA/backup_script/logs.txt'
+source='/Volumes/StrokeDropRAID/10-22-temp'
+full_backup_path='/Volumes/18Drop/StrokeDropBackup'
+daily_backup_path='/Volumes/18Drop/StrokeDropBackup'
+log_path='/Volumes/18Drop/StrokeDropBackup/log/log.txt'
 
 script_name="${0##*/}"
 SECONDS=0
@@ -33,10 +33,13 @@ print_disk_usage
 mkdir -p "${full_dir}"
 
 echo 'RSYNC Output:'
-rsync --archive --delete --backup  --verbose \
---backup-dir='${daily_dir}' \
+rsync --archive --delete --backup  \
+--backup-dir=${daily_dir} \
 ${source} \
 ${full_dir}
+
+end_time="$(date +%Y.%m.%d-%H.%M.%S)"
+echo 'Completed on:' ${end_time}
 
 echo '============================================='
 
